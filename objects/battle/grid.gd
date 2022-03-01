@@ -11,6 +11,7 @@ onready var pathfinding = $Pathfinding
 onready var selected_unit := get_node("Unit")
 onready var grid_real_size := grid_size * cell_size
 
+
 func _ready():
 	generate_pathfinding()
 
@@ -62,3 +63,5 @@ func connect_point_if_valid( existing_point:int, connect_point:int ) -> void:
 func is_within_bounds(cell_coordinates: Vector2) -> bool:
 	var out := cell_coordinates.x >= position.x and cell_coordinates.x - position.x < grid_real_size.x
 	return out and cell_coordinates.y >= position.y and cell_coordinates.y - position.y < grid_real_size.y
+
+
