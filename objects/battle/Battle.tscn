@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://objects/battle/grid.gd" type="Script" id=1]
+[ext_resource path="res://objects/battle/draw.gd" type="Script" id=2]
+[ext_resource path="res://objects/battle/battle.gd" type="Script" id=3]
+[ext_resource path="res://objects/battle/pathfinding.gd" type="Script" id=4]
+[ext_resource path="res://objects/battle/unit.gd" type="Script" id=5]
+[ext_resource path="res://objects/battle/resources/cloaked-figure-on-horseback.png" type="Texture" id=6]
+
+[node name="Battle" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Grid" type="Node2D" parent="."]
+position = Vector2( 20, 15 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+grid_size = Vector2( 15, 15 )
+
+[node name="Draw" type="Node2D" parent="Grid"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+draw_points = false
+draw_connections = false
+line_thickness = 2.0
+grid_path = NodePath("..")
+
+[node name="Pathfinding" type="Node" parent="Grid"]
+script = ExtResource( 4 )
+
+[node name="Unit" type="Node2D" parent="Grid"]
+script = ExtResource( 5 )
+grid_path = NodePath("..")
+index_on_grid = 34
+
+[node name="Sprite" type="Sprite" parent="Grid/Unit"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 6 )
+
+[node name="Tween" type="Tween" parent="Grid/Unit"]

@@ -1,0 +1,58 @@
+extends Node2D
+
+
+export var cell_size := Vector2(80, 80)
+export var grid_size := Vector2(5, 5)
+
+var half_cell_size = cell_size / 2
+
+onready var draw = $Draw
+onready var pathfinding = $Pathfinding 
+onready var selected_unit := get_node("Unit")
+
+func _ready():
+	generate_pathfinding()
+
+
+func _input(event):
+	if event.is_action_released("LeftClick"):
+		selected_unit.move_to_index(pathfinding.astar.get_closest_point(get_global_mouse_position()), true)
+		print(get_global_mouse_position())
+		print(pathfinding.astar.get_closest_point(get_global_mouse_position()))
+
+
+
+func generate_pathfinding() -> void:
+	var i := 0
+	for y in range(0, grid_size.y):	
+		for x in range(0, grid_size.x):
+			# Add point 
+			pathfinding.astar.add_point(i, (Vector2(x,y) * cell_size + half_cell_size))	
+			generate_connection(x, y, i)
+			i += 1
+
+
+func generate_connection(x:int, y:int, i:int) -> void:
+	# ?
+	astar_connect_point_if_valid(i, i + int(grid_size.y))	
+	astar_connect_point_if_valid(i, i - int(grid_size.y))	
+	# x
+	if x > 0:
+		astar_connect_point_if_valid(i, i - 1)
+	if x < grid_size.x:
+		astar_connect_point_if_valid(i, i + 1)
+	# y
+	if x < grid_size.x and y < grid_size.y:
+		astar_connect_point_if_valid(i, i + int(grid_size.y) + 1)	
+	if x > 0 and y > grid_size.y:
+		astar_connect_point_if_valid(i, i + int(grid_size.y) - 1)	
+	# diagonal
+	if x < grid_size.x and y > 0:
+		astar_connect_point_if_valid(i, i - int(grid_size.y) + 1)	
+	if x > 0 and y > 0:
+		astar_connect_point_if_valid(i, i - int(grid_size.y) - 1)	
+
+
+func astar_connect_point_if_valid( existing_point:int, connect_point:int ) -> void:
+	if pathfinding.astar.has_point(connect_point):
+		pathfinding.astar.connect_points(existing_point, connect_point, true)	
