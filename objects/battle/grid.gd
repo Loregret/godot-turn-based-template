@@ -5,25 +5,25 @@ export var cell_size := Vector2(80, 80)
 export var grid_size := Vector2(5, 5)
 
 var half_cell_size := cell_size / 2
-var grid_real_size := grid_size * cell_size
 
 onready var draw = $Draw
 onready var pathfinding = $Pathfinding 
 onready var selected_unit := get_node("Unit")
+onready var grid_real_size := grid_size * cell_size
 
 func _ready():
 	generate_pathfinding()
 
 
 func is_within_bounds(cell_coordinates: Vector2) -> bool:
-	var out := cell_coordinates.x >= position.x and cell_coordinates.x < grid_real_size.x
-	return out and cell_coordinates.y >= position.y and cell_coordinates.y < grid_real_size.y
+	var out := cell_coordinates.x >= position.x and cell_coordinates.x - position.x < grid_real_size.x
+	return out and cell_coordinates.y >= position.y and cell_coordinates.y - position.y < grid_real_size.y
 
 
 func _input(event):
 	if event.is_action_released("LeftClick") and is_within_bounds(get_global_mouse_position()) and not selected_unit.is_moving:
-		selected_unit.move_to_index(pathfinding.astar.get_closest_point(get_global_mouse_position()), true)
-		print("grid mouse input: ", get_global_mouse_position())
+		selected_unit.move_to_index(pathfinding.astar.get_closest_point(get_global_mouse_position() - position), true)
+		print("grid mouse input: ", get_global_mouse_position() - position)
 		print("Unit ",selected_unit.get_instance_id()," moving to cell: ",
 		pathfinding.astar.get_closest_point(get_global_mouse_position()))
 
