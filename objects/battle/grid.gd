@@ -15,11 +15,6 @@ func _ready():
 	generate_pathfinding()
 
 
-func is_within_bounds(cell_coordinates: Vector2) -> bool:
-	var out := cell_coordinates.x >= position.x and cell_coordinates.x - position.x < grid_real_size.x
-	return out and cell_coordinates.y >= position.y and cell_coordinates.y - position.y < grid_real_size.y
-
-
 func _input(event):
 	if event.is_action_released("LeftClick") and is_within_bounds(get_global_mouse_position()) and not selected_unit.is_moving:
 		selected_unit.move_to_index(pathfinding.astar.get_closest_point(get_global_mouse_position() - position), true)
@@ -40,25 +35,30 @@ func generate_pathfinding() -> void:
 
 func generate_connection(x:int, y:int, i:int) -> void:
 	# ?
-	astar_connect_point_if_valid(i, i + int(grid_size.y))	
-	astar_connect_point_if_valid(i, i - int(grid_size.y))	
+	connect_point_if_valid(i, i + int(grid_size.y))	
+	connect_point_if_valid(i, i - int(grid_size.y))	
 	# x
 	if x > 0:
-		astar_connect_point_if_valid(i, i - 1)
+		connect_point_if_valid(i, i - 1)
 	if x < grid_size.x:
-		astar_connect_point_if_valid(i, i + 1)
+		connect_point_if_valid(i, i + 1)
 	# y
 	if x < grid_size.x and y < grid_size.y:
-		astar_connect_point_if_valid(i, i + int(grid_size.y) + 1)	
+		connect_point_if_valid(i, i + int(grid_size.y) + 1)	
 	if x > 0 and y > grid_size.y:
-		astar_connect_point_if_valid(i, i + int(grid_size.y) - 1)	
+		connect_point_if_valid(i, i + int(grid_size.y) - 1)	
 	# diagonal
 	if x < grid_size.x and y > 0:
-		astar_connect_point_if_valid(i, i - int(grid_size.y) + 1)	
+		connect_point_if_valid(i, i - int(grid_size.y) + 1)	
 	if x > 0 and y > 0:
-		astar_connect_point_if_valid(i, i - int(grid_size.y) - 1)	
+		connect_point_if_valid(i, i - int(grid_size.y) - 1)	
 
 
-func astar_connect_point_if_valid( existing_point:int, connect_point:int ) -> void:
+func connect_point_if_valid( existing_point:int, connect_point:int ) -> void:
 	if pathfinding.astar.has_point(connect_point):
 		pathfinding.astar.connect_points(existing_point, connect_point, true)	
+
+
+func is_within_bounds(cell_coordinates: Vector2) -> bool:
+	var out := cell_coordinates.x >= position.x and cell_coordinates.x - position.x < grid_real_size.x
+	return out and cell_coordinates.y >= position.y and cell_coordinates.y - position.y < grid_real_size.y
