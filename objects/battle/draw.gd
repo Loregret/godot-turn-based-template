@@ -8,6 +8,7 @@ export var draw_grid := true
 export var draw_points := true
 export var draw_connections := true
 export var draw_indexes := true
+export var draw_unit_path := true
 # Customization
 export var color := Color.black
 export var connection_color := Color("#47000000")
@@ -39,7 +40,7 @@ func _draw() -> void:
 		if draw_connections: _draw_point_connections()
 		if draw_indexes: _draw_indexes()
 		if draw_points: _draw_points()
-		_draw_path(grid.selected_unit)
+		if draw_unit_path: _draw_unit_path(grid.selected_unit)
 
 
 func _draw_grid() -> void:
@@ -72,7 +73,7 @@ func _draw_points() -> void:
 		draw_circle(pathfinding.astar.get_point_position(i), 2.0, Color.red)
 
 
-func _draw_path(unit) -> void:
+func _draw_unit_path(unit) -> void:
 	for i in range(0, unit.path.size()):
 		if unit.path.size() > 1:
 			draw_circle(unit.path[i], 5.0, Color.red)
