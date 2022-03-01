@@ -1,4 +1,4 @@
-# tool
+tool
 extends Node2D
 
 
@@ -16,10 +16,10 @@ export var line_thickness := 4.5
 # Nodes
 export var grid_path: NodePath
 
-var grid:Node2D 
-var cell_size:Vector2
-var size:Vector2
-var pathfinding:Node  
+var grid: Node2D 
+var cell_size: Vector2
+var size: Vector2
+var pathfinding: Node  
 
 
 func _ready() -> void:
@@ -27,8 +27,8 @@ func _ready() -> void:
 		grid = get_node(grid_path) 
 		cell_size = grid.cell_size
 		size = grid.grid_size
-		pathfinding = grid.get_node("Pathfinding")
 		update()
+		pathfinding = grid.get_node("Pathfinding")
 	else:
 		push_error( "draw script: grid_path is invalid")
 
@@ -78,4 +78,4 @@ func _draw_unit_path(unit) -> void:
 		if unit.path.size() > 1:
 			draw_circle(unit.path[i], 5.0, Color.red)
 			if i < unit.path.size() - 1: 
-				draw_line(unit.path[i], unit.path[i+1], Color.red, 2.0)
+				draw_line(unit.path[i], unit.path[i+1], Color.red, 1.6)

@@ -29,15 +29,18 @@ func move_to_index(index:int, play_tween: bool = false) -> void:
 		is_moving = true
 		path = grid.pathfinding.astar.get_point_path(index_on_grid, index)
 		for i in path:
+			grid.pathfinding.astar.set_point_disabled(index_on_grid, false)
 			tween.interpolate_property(self, "position",
-			position, i, path.size() * 0.1, Tween.TRANS_SINE, tween.EASE_OUT)
+			position, i, clamp((1 - abs(path.size() * 0.1)), 0.45, 0.6)  , Tween.TRANS_SINE, tween.EASE_OUT)
 			tween.start()	
 			yield(tween, "tween_all_completed")
 			index_on_grid = index
+			grid.pathfinding.astar.set_point_disabled(index_on_grid, true)
 			path.remove(0)
 			grid.draw.update()
 		is_moving = false
 		path = []
 	else:
+		grid.pathfinding.astar.set_point_disabled(index_on_grid, true)
 		position = grid.pathfinding.astar.get_point_position(index)
 

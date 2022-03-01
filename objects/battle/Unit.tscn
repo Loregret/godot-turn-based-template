@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/battle/unit.gd" type="Script" id=1]
+[ext_resource path="res://objects/battle/resources/cloaked-figure-on-horseback.png" type="Texture" id=2]
+
+[node name="Unit" type="Node2D"]
+script = ExtResource( 1 )
+grid_path = NodePath("..")
+index_on_grid = 34
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
