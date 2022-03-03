@@ -1,13 +1,14 @@
 extends Node2D
-var grid:Node2D
 
 export var grid_path: NodePath
 export var index_on_grid: int = 0
 
 var is_moving := false
 var path: PoolVector2Array
+var grid:Node2D
 
 onready var tween := $Tween
+onready var sprite := $Sprite
 
 
 func _ready():
@@ -15,6 +16,14 @@ func _ready():
 	grid = get_node(grid_path)
 	yield(get_tree().create_timer(0.01), "timeout")
 	move_to_index(index_on_grid, false)
+
+
+func is_within_bounds(pos:Vector2) -> bool:
+	if pos >= position + (grid.unit.sprite.get_rect().size * grid.unit.sprite.scale) / 2:
+		return true
+	if pos <= position - (grid.unit.sprite.get_rect().size * grid.unit.sprite.scale) / 2:
+		return true
+	return false
 
 
 func grid_path_is_valid() -> bool:
@@ -37,7 +46,6 @@ func move_to_index(index:int, play_tween: bool = false) -> void:
 			index_on_grid = index
 			grid.pathfinding.astar.set_point_disabled(index_on_grid, true)
 			path.remove(0)
-			grid.draw.update()
 		is_moving = false
 		path = []
 	else:

@@ -30,9 +30,6 @@ draw_connections = false
 line_thickness = 2.0
 grid_path = NodePath("..")
 
-[node name="Pathfinding" type="Node" parent="Grid"]
-script = ExtResource( 4 )
-
 [node name="Units" type="Node2D" parent="Grid"]
 __meta__ = {
 "_edit_lock_": true
@@ -46,3 +43,6 @@ grid_path = NodePath("../..")
 position = Vector2( 37, 38 )
 grid_path = NodePath("../..")
 index_on_grid = 25
+
+[node name="Pathfinding" type="Node" parent="Grid"]
+script = ExtResource( 4 )

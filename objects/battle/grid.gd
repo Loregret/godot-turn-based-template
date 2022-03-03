@@ -8,7 +8,7 @@ var half_cell_size := cell_size / 2
 
 onready var draw = $Draw
 onready var pathfinding = $Pathfinding 
-onready var selected_unit := get_node("Units/Unit")
+onready var selected_unit := get_node_or_null("Units/Unit")
 onready var grid_real_size := grid_size * cell_size
 
 
@@ -17,11 +17,16 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_released("LeftClick") and is_within_bounds(get_global_mouse_position()) and not selected_unit.is_moving:
-		selected_unit.move_to_index(pathfinding.astar.get_closest_point(get_global_mouse_position() - position), true)
-		print("grid mouse input: ", get_global_mouse_position() - position)
-		print("Unit ",selected_unit.get_instance_id()," moving to cell: ",
-		pathfinding.astar.get_closest_point(get_global_mouse_position()))
+	# Movement
+	if event.is_action_released("LeftClick") and selected_unit != null:
+		if is_within_bounds(get_global_mouse_position()) and not selected_unit.is_moving:
+			selected_unit.move_to_index(pathfinding.astar.get_closest_point(get_global_mouse_position() - position), true)
+	# Selection
+	if event.is_action_released("LeftClick") and selected_unit == null:
+		print(1111)
+	# Deselect
+	if event.is_action_released('RightClick') and not selected_unit.is_moving:
+		selected_unit = null
 
 
 func generate_pathfinding() -> void:
