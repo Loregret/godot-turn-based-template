@@ -23,9 +23,9 @@ func _input(event):
 			selected_unit.move_to_index(pathfinding.astar.get_closest_point(get_global_mouse_position() - position), true)
 	# Selection
 	if event.is_action_released("LeftClick") and selected_unit == null:
-		print(1111)
+		pass
 	# Deselect
-	if event.is_action_released('RightClick') and not selected_unit.is_moving:
+	if event.is_action_released('RightClick') and selected_unit != null and not selected_unit.is_moving:
 		selected_unit = null
 
 

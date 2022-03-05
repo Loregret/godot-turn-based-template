@@ -12,6 +12,7 @@ onready var sprite := $Sprite
 
 
 func _ready():
+	self.connect("input_event", self, "_on_unit_input_event")
 	position = Vector2.ZERO
 	grid = get_node(grid_path)
 	yield(get_tree().create_timer(0.01), "timeout")
@@ -52,3 +53,8 @@ func move_to_index(index:int, play_tween: bool = false) -> void:
 		grid.pathfinding.astar.set_point_disabled(index_on_grid, true)
 		position = grid.pathfinding.astar.get_point_position(index)
 
+
+
+func _on_unit_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event.is_action("LeftClick") and event.is_pressed():
+		print("hello")
