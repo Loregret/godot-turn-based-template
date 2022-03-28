@@ -8,7 +8,7 @@ var half_cell_size := cell_size / 2
 
 onready var draw = $Draw
 onready var pathfinding = $Pathfinding 
-onready var selected_unit := get_node_or_null("Units/Unit")
+onready var selected_unit:Area2D = get_node_or_null("Units/Unit")
 onready var grid_real_size := grid_size * cell_size
 
 

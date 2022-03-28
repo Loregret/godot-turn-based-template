@@ -38,10 +38,8 @@ __meta__ = {
 position = Vector2( 121, 40 )
 grid_path = NodePath("../..")
 
-[node name="Unit2" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 37, 38 )
-grid_path = NodePath("../..")
-index_on_grid = 25
+[node name="Camera2D" type="Camera2D" parent="Grid/Units/Unit"]
+current = true
 
 [node name="Pathfinding" type="Node" parent="Grid"]
 script = ExtResource( 4 )
