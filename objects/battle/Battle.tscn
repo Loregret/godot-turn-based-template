@@ -26,7 +26,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 draw_points = false
-draw_connections = false
 line_thickness = 2.0
 grid_path = NodePath("..")
 

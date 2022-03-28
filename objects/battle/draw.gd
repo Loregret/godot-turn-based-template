@@ -16,13 +16,13 @@ export var sub_color := Color.red
 export var line_thickness := 4.5
 # Nodes
 export var grid_path: NodePath
-
+# Empty vars
 var grid: Node2D 
 var cell_size: Vector2
 var size: Vector2
 var pathfinding: Node  
 
-var grid_has_been_drawn := false
+
 
 func _ready() -> void:
 	if has_node(grid_path):
@@ -48,6 +48,7 @@ func _draw() -> void:
 		if grid.selected_unit != null:
 			if draw_unit_path: _draw_unit_path(grid.selected_unit)
 			if draw_unit_selection: _draw_unit_selection(grid.selected_unit)
+
 
 func _draw_grid() -> void:
 	for x in range(0, size.x + 1):
@@ -90,3 +91,4 @@ func _draw_unit_path(unit: Node2D) -> void:
 func _draw_unit_selection(unit: Node2D) -> void:
 	draw_rect(Rect2(unit.position - (unit.sprite.get_rect().size * unit.sprite.scale )/2,
 	unit.sprite.get_rect().size * unit.sprite.scale), sub_color, false, 2.0, true)
+
