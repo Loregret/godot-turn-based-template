@@ -52,9 +52,9 @@ func _draw() -> void:
 
 func _draw_grid() -> void:
 	for x in range(0, size.x + 1):
-		draw_line(Vector2(x * cell_size.x, 0), Vector2(x*cell_size.x, cell_size.y * size.y), color, line_thickness)
+		draw_line(Vector2(x * cell_size.x, 0), Vector2(x*cell_size.x, cell_size.y * size.y), color, line_thickness, true)
 		for y in range(0, size.y + 1):
-			draw_line(Vector2(-2.2, y * cell_size.y), Vector2(size.x * cell_size.x + 1.8, y * cell_size.y),color,line_thickness)
+			draw_line(Vector2(0, y * cell_size.y), Vector2(size.x * cell_size.x, y * cell_size.y),color,line_thickness, true)
 
 
 func _draw_point_connections() -> void:
