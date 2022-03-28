@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Dreamiour Engine"
-run/main_scene="res://objects/battle/Battle.tscn"
+run/main_scene="res://test.tscn"
 config/icon="res://assets/icon.png"
 
 [autoload]

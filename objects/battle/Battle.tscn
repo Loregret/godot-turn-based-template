@@ -18,14 +18,17 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-grid_size = Vector2( 15, 15 )
+grid_size = Vector2( 45, 45 )
 
 [node name="Draw" type="Node2D" parent="Grid"]
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+draw = false
 draw_points = false
+draw_connections = false
+draw_indexes = false
 line_thickness = 2.0
 grid_path = NodePath("..")
 

@@ -55,6 +55,6 @@ func move_to_index(index:int, play_tween: bool = false) -> void:
 
 
 
-func _on_unit_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_unit_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action("LeftClick") and event.is_pressed():
 		print("hello")
