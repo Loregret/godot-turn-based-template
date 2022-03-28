@@ -12,7 +12,7 @@ onready var sprite := $Sprite
 
 
 func _ready():
-	self.connect("input_event", self, "_on_unit_input_event")
+	var _inpsignal = self.connect("input_event", self, "_on_unit_input_event")
 	position = Vector2.ZERO
 	grid = get_node(grid_path)
 	yield(get_tree().create_timer(0.01), "timeout")

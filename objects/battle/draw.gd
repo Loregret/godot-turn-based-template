@@ -1,4 +1,4 @@
-tool
+#tool
 extends Node2D
 
 
@@ -30,7 +30,6 @@ func _ready() -> void:
 		grid = get_node(grid_path) 
 		cell_size = grid.cell_size
 		size = grid.grid_size
-		update()
 		pathfinding = grid.get_node("Pathfinding")
 	else:
 		push_error( "draw script: grid_path is invalid")
@@ -42,7 +41,7 @@ func _process(_delta):
 
 func _draw() -> void:
 	if has_node(grid_path) and draw:
-		if draw_grid: _draw_grid()
+		if draw_grid: _draw_grid(false)
 		if Engine.editor_hint: return
 		if draw_connections: _draw_point_connections()
 		if draw_indexes: _draw_indexes()
@@ -52,11 +51,11 @@ func _draw() -> void:
 			if draw_unit_selection: _draw_unit_selection(grid.selected_unit)
 
 
-func _draw_grid() -> void:
+func _draw_grid(smooth: bool) -> void:
 	for x in range(0, size.x + 1):
-		draw_line(Vector2(x * cell_size.x, 0), Vector2(x*cell_size.x, cell_size.y * size.y), color, line_thickness, true)
-		for y in range(0, size.y + 1):
-			draw_line(Vector2(0, y * cell_size.y), Vector2(size.x * cell_size.x, y * cell_size.y),color,line_thickness, true)
+		draw_line(Vector2(x * cell_size.x, 0), Vector2(x*cell_size.x, cell_size.y * size.y), color, line_thickness, smooth)
+	for y in range(0, size.y + 1):
+		draw_line(Vector2(0, y * cell_size.y), Vector2(size.x * cell_size.x, y * cell_size.y),color,line_thickness, smooth)
 
 
 func _draw_point_connections() -> void:
