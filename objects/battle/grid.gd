@@ -24,8 +24,13 @@ func _input(event):
 	# Movement
 	if event.is_action_released("LeftClick") and selected_unit != null:
 		var mouse_pos := get_global_mouse_position()
+		var clicked_cell:int = pathfinding.astar.get_closest_point(get_global_mouse_position() - position)
 		if is_within_bounds(mouse_pos) and !selected_unit.is_within_bounds(mouse_pos) and not selected_unit.is_moving:
-			selected_unit.move_to_index(pathfinding.astar.get_closest_point(get_global_mouse_position() - position), true)
+			if selected_unit.is_point_accesible(clicked_cell):
+				## need to check if path is blocked!
+				selected_unit.move_to_index(clicked_cell, true)
+				print(selected_unit, " is moving from ", selected_unit.index_on_grid, " to ", clicked_cell)
+			else: print(selected_unit, " - path is blocked")
 	# Selection
 	elif event.is_action_released("LeftClick") and selected_unit == null:
 		pass
@@ -87,5 +92,6 @@ func connect_to_units():
 
 
 func _on_unit_clicked(unit_ref):
-	print("unit ", unit_ref, " was clicked")
-	selected_unit = unit_ref
+	if selected_unit == null or !selected_unit.is_moving:
+		selected_unit = unit_ref
+		print(unit_ref, " - selected")

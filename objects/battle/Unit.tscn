@@ -12,6 +12,7 @@ grid_path = NodePath("..")
 index_on_grid = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.427451 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

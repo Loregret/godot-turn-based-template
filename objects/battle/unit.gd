@@ -25,7 +25,6 @@ func _ready():
 
 
 func is_within_bounds(pos:Vector2) -> bool:
-	print(pos, ", ", position-rect_shape.extents, ", ", position+rect_shape.extents)
 	if pos.x >= position.x - rect_shape.extents.x and\
 	pos.y >= position.y - rect_shape.extents.y and\
 	pos.x <= position.x + rect_shape.extents.x and\
@@ -33,14 +32,21 @@ func is_within_bounds(pos:Vector2) -> bool:
 		return true
 	return false
 
-func grid_path_is_valid() -> bool:
+
+func grid_nodepath_is_valid() -> bool:
 	if has_node(grid_path): return true
 	push_error("Unit: invalid grid_path!")
 	return false 
 
 
+func is_point_accesible(point:int) -> bool:
+	var path2point = grid.pathfinding.astar.get_point_path(index_on_grid, point)
+	if path2point.size() > 0: return true
+	return false
+
+
 func move_to_index(index:int, play_tween: bool = false) -> void:
-	if !grid_path_is_valid(): return
+	if !grid_nodepath_is_valid(): return
 	if play_tween:
 		is_moving = true
 		path = grid.pathfinding.astar.get_point_path(index_on_grid, index)

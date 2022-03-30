@@ -14,6 +14,7 @@ __meta__ = {
 }
 
 [node name="Camera" parent="." instance=ExtResource( 6 )]
+visible = false
 camera_zoom_speed = Vector2( 0.1, 0.1 )
 
 [node name="Grid" type="Node2D" parent="."]
@@ -48,8 +49,26 @@ position = Vector2( 200, 40 )
 grid_path = NodePath("../..")
 index_on_grid = 2
 
+[node name="Unit3" parent="Grid/Units" instance=ExtResource( 5 )]
+position = Vector2( 120, 116 )
+grid_path = NodePath("../..")
+index_on_grid = 16
+
+[node name="Unit5" parent="Grid/Units" instance=ExtResource( 5 )]
+position = Vector2( 186, 121 )
+grid_path = NodePath("../..")
+index_on_grid = 17
+
+[node name="Unit4" parent="Grid/Units" instance=ExtResource( 5 )]
+position = Vector2( 43, 119 )
+grid_path = NodePath("../..")
+index_on_grid = 15
+
 [node name="Pathfinding" type="Node" parent="Grid"]
 script = ExtResource( 4 )
 
 [connection signal="input_event" from="Grid/Units/Unit" to="Grid/Units/Unit" method="_on_Unit_input_event"]
 [connection signal="input_event" from="Grid/Units/Unit2" to="Grid/Units/Unit2" method="_on_Unit_input_event"]
+[connection signal="input_event" from="Grid/Units/Unit3" to="Grid/Units/Unit3" method="_on_Unit_input_event"]
+[connection signal="input_event" from="Grid/Units/Unit5" to="Grid/Units/Unit5" method="_on_Unit_input_event"]
+[connection signal="input_event" from="Grid/Units/Unit4" to="Grid/Units/Unit4" method="_on_Unit_input_event"]
