@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://objects/battle/grid.gd" type="Script" id=1]
 [ext_resource path="res://objects/battle/draw.gd" type="Script" id=2]
 [ext_resource path="res://objects/battle/battle.gd" type="Script" id=3]
 [ext_resource path="res://objects/battle/pathfinding.gd" type="Script" id=4]
 [ext_resource path="res://objects/battle/Unit.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/battle/camera2D.gd" type="Script" id=6]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 3 )
@@ -16,6 +17,8 @@ __meta__ = {
 position = Vector2( 121, 40 )
 current = true
 zoom = Vector2( 1.5, 1.5 )
+script = ExtResource( 6 )
+camera_margin = -25
 
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource( 1 )
