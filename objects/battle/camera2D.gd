@@ -10,17 +10,18 @@ export (bool) var key = true
 export (bool) var drag = true
 export (bool) var edge = false
 export (bool) var wheel = true
+export (bool) var zoom_interpolate = true
 
 
 export (int) var camera_speed = 450 
 
-export (int) var camera_margin = 50
+export (int) var camera_margin = -25
 
-export (int) var zoom_out_limit = 100
+export (Vector2) var zoom_out_limit = Vector2(2.5, 2.5)
 
-export (float) var zoom_in_limit = 0.5
+export (Vector2) var zoom_in_limit = Vector2(0.5, 0.5)
 
-export (Vector2) var camera_zoom_speed = Vector2(0.5, 0.5)
+export (Vector2) var camera_zoom_speed = Vector2(0.1, 0.1)
 
 var camera_movement = Vector2()
 var camera_zoom = get_zoom()
@@ -32,6 +33,9 @@ var _prev_mouse_pos = null
 var __rmbk = false
 # Move camera by keys: left, top, right, bottom.
 var __keys = [false, false, false, false]
+
+onready var tween = $Tween
+
 
 func _ready():
 	set_h_drag_enabled(false)
@@ -85,20 +89,17 @@ func _unhandled_input( event ):
 			else: __rmbk = false
 		if wheel:
 			if event.button_index == BUTTON_WHEEL_UP:
-				if camera_zoom.x - camera_zoom_speed.x > zoom_in_limit and\
-				camera_zoom.y - camera_zoom_speed.y > zoom_in_limit:
+				if camera_zoom - camera_zoom_speed > zoom_in_limit:
 					camera_zoom -= camera_zoom_speed
-					set_zoom(camera_zoom)
+					perform_zoom(camera_zoom, zoom_interpolate)
 				else:
-					set_zoom(Vector2(zoom_in_limit, zoom_in_limit))
-					print(1)
+					perform_zoom(zoom_in_limit, zoom_interpolate)
 			if event.button_index == BUTTON_WHEEL_DOWN:
-				if camera_zoom.x + camera_zoom_speed.x < zoom_out_limit and\
-				camera_zoom.y + camera_zoom_speed.y < zoom_out_limit:
+				if camera_zoom + camera_zoom_speed < zoom_out_limit:
 					camera_zoom += camera_zoom_speed
-					set_zoom(camera_zoom)
+					perform_zoom(camera_zoom, zoom_interpolate)
 				else:
-					set_zoom(Vector2(zoom_out_limit, zoom_out_limit))	
+					perform_zoom(zoom_out_limit, zoom_interpolate)	
 		if key:
 			# Control by keyboard handled by InpuMap.
 			if event.is_action_pressed("ui_left"):
@@ -117,3 +118,13 @@ func _unhandled_input( event ):
 				__keys[2] = false
 			if event.is_action_released("ui_down"):
 				__keys[3] = false
+
+
+func perform_zoom(zoom_vector: Vector2, interpolate: bool) -> void:
+	if interpolate:
+		tween.stop(self, "zoom")
+		tween.interpolate_property(self, "zoom",
+		zoom, zoom_vector, 0.2, Tween.TRANS_SINE, tween.EASE_OUT)
+		tween.start()	
+	else:
+		set_zoom(zoom_vector)
