@@ -11,7 +11,6 @@ export (bool) var drag = true
 export (bool) var edge = false
 export (bool) var wheel = true
 
-export (int) var zoom_out_limit = 100
 
 # Camera speed in px/s.
 export (int) var camera_speed = 450 
@@ -23,9 +22,11 @@ var camera_zoom = get_zoom()
 # to move a view.
 export (int) var camera_margin = 50
 
+export (int) var zoom_out_limit = 100
+export (float) var zoom_in_limit = 0.5
 # It changes a camera zoom value in units... (?, but it works... it probably
 # multiplies camera size by 1+camera_zoom_speed)
-const camera_zoom_speed = Vector2(0.5, 0.5)
+export (Vector2) var camera_zoom_speed = Vector2(0.5, 0.5)
 
 # Vector of camera's movement / second.
 var camera_movement = Vector2()
@@ -91,20 +92,21 @@ func _unhandled_input( event ):
 			if event.pressed: __rmbk = true
 			else: __rmbk = false
 		if wheel:
-			# Check if mouse wheel was used. Not handled by InputMap!
-			# Checking if future zoom won't be under 0.
-			# In that cause engine will flip screen.
-			if event.button_index == BUTTON_WHEEL_UP and\
-			camera_zoom.x - camera_zoom_speed.x > 0 and\
-			camera_zoom.y - camera_zoom_speed.y > 0:
-				camera_zoom -= camera_zoom_speed
-				set_zoom(camera_zoom)
-				# Checking if future zoom won't be above zoom_out_limit.
-			if event.button_index == BUTTON_WHEEL_DOWN and\
-			camera_zoom.x + camera_zoom_speed.x < zoom_out_limit and\
-			camera_zoom.y + camera_zoom_speed.y < zoom_out_limit:
-				camera_zoom += camera_zoom_speed
-				set_zoom(camera_zoom)
+			if event.button_index == BUTTON_WHEEL_UP:
+				if camera_zoom.x - camera_zoom_speed.x > zoom_in_limit and\
+				camera_zoom.y - camera_zoom_speed.y > zoom_in_limit:
+					camera_zoom -= camera_zoom_speed
+					set_zoom(camera_zoom)
+				else:
+					set_zoom(Vector2(zoom_in_limit, zoom_in_limit))
+					print(1)
+			if event.button_index == BUTTON_WHEEL_DOWN:
+				if camera_zoom.x + camera_zoom_speed.x < zoom_out_limit and\
+				camera_zoom.y + camera_zoom_speed.y < zoom_out_limit:
+					camera_zoom += camera_zoom_speed
+					set_zoom(camera_zoom)
+				else:
+					set_zoom(Vector2(zoom_out_limit, zoom_out_limit))	
 		if key:
 			# Control by keyboard handled by InpuMap.
 			if event.is_action_pressed("ui_left"):

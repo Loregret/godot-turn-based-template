@@ -86,7 +86,7 @@ func _draw_unit_path(unit: Node2D) -> void:
 		if unit.path.size() > 1:
 			draw_circle(unit.path[i], 5.0, sub_color)
 			if i < unit.path.size() - 1: 
-				draw_line(unit.path[i], unit.path[i+1], sub_color, 1.6)
+				draw_line(unit.path[i], unit.path[i+1], sub_color, 1.6, true)
 
 
 func _draw_unit_selection(unit: Node2D) -> void:
