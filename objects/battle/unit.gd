@@ -18,10 +18,14 @@ signal clicked(unit_ref)
 
 
 func _ready():
-	position = Vector2.ZERO
 	grid = get_node(grid_path)
 	yield(get_tree().create_timer(0.01), "timeout")
-	move_to_index(index_on_grid, false)
+	if grid.pathfinding != null:
+		if self.index_on_grid == -1: 
+			self.index_on_grid = grid.pathfinding.astar.get_closest_point(self.position)
+			print(index_on_grid)
+		else: position = Vector2.ZERO
+		move_to_index(index_on_grid, false)
 
 
 func is_within_bounds(pos:Vector2) -> bool:

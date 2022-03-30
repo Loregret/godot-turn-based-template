@@ -94,4 +94,4 @@ func connect_to_units():
 func _on_unit_clicked(unit_ref):
 	if selected_unit == null or !selected_unit.is_moving:
 		selected_unit = unit_ref
-		print(unit_ref, " - selected")
+		print(unit_ref, " - selected on ", unit_ref.index_on_grid)

@@ -40,29 +40,29 @@ __meta__ = {
 }
 
 [node name="Unit" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 40, 40 )
+position = Vector2( 520, 40 )
 grid_path = NodePath("../..")
-index_on_grid = 0
+index_on_grid = -1
 
 [node name="Unit2" parent="Grid/Units" instance=ExtResource( 5 )]
 position = Vector2( 200, 40 )
 grid_path = NodePath("../..")
-index_on_grid = 2
+index_on_grid = -1
 
 [node name="Unit3" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 120, 116 )
+position = Vector2( 120, 120 )
 grid_path = NodePath("../..")
-index_on_grid = 16
+index_on_grid = -1
 
 [node name="Unit5" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 186, 121 )
+position = Vector2( 200, 120 )
 grid_path = NodePath("../..")
-index_on_grid = 17
+index_on_grid = -1
 
 [node name="Unit4" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 43, 119 )
+position = Vector2( 40, 120 )
 grid_path = NodePath("../..")
-index_on_grid = 15
+index_on_grid = -1
 
 [node name="Pathfinding" type="Node" parent="Grid"]
 script = ExtResource( 4 )
