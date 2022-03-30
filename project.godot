@@ -20,7 +20,7 @@ config/icon="res://assets/icon.png"
 
 [autoload]
 
-Controller="*res://scripts/autload/controller.gd"
+Controller="*res://singleton/autload/controller.gd"
 
 [display]
 
