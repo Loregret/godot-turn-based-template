@@ -7,10 +7,14 @@ var is_moving := false
 var path: PoolVector2Array
 var grid:Node2D
 
+
 onready var tween := $Tween
 onready var sprite := $Sprite
+onready var collision:CollisionShape2D = $CollisionShape2D
+onready var rect_shape:RectangleShape2D = collision.shape
 
-signal clicked(value)
+
+signal clicked(unit_ref)
 
 
 func _ready():
@@ -21,12 +25,13 @@ func _ready():
 
 
 func is_within_bounds(pos:Vector2) -> bool:
-	if pos >= position + (grid.unit.sprite.get_rect().size * grid.unit.sprite.scale) / 2:
-		return true
-	if pos <= position - (grid.unit.sprite.get_rect().size * grid.unit.sprite.scale) / 2:
+	print(pos, ", ", position-rect_shape.extents, ", ", position+rect_shape.extents)
+	if pos.x >= position.x - rect_shape.extents.x and\
+	pos.y >= position.y - rect_shape.extents.y and\
+	pos.x <= position.x + rect_shape.extents.x and\
+	pos.y <= position.y + rect_shape.extents.y: 
 		return true
 	return false
-
 
 func grid_path_is_valid() -> bool:
 	if has_node(grid_path): return true

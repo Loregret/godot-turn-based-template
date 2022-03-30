@@ -9,7 +9,8 @@ var units := []
 
 onready var draw = $Draw
 onready var pathfinding = $Pathfinding 
-onready var selected_unit:Area2D = get_node_or_null("Units/Unit")
+onready var selected_unit:Area2D = null
+#onready var selected_unit:Area2D = get_node_or_null("Units/Unit")
 onready var grid_real_size:Vector2 = grid_size * cell_size
 
 
@@ -19,17 +20,17 @@ func _ready():
 	yield(get_tree().create_timer(1), "timeout")
 
 
-
 func _input(event):
 	# Movement
 	if event.is_action_released("LeftClick") and selected_unit != null:
-		if is_within_bounds(get_global_mouse_position()) and not selected_unit.is_moving:
+		var mouse_pos := get_global_mouse_position()
+		if is_within_bounds(mouse_pos) and !selected_unit.is_within_bounds(mouse_pos) and not selected_unit.is_moving:
 			selected_unit.move_to_index(pathfinding.astar.get_closest_point(get_global_mouse_position() - position), true)
 	# Selection
-	if event.is_action_released("LeftClick") and selected_unit == null:
+	elif event.is_action_released("LeftClick") and selected_unit == null:
 		pass
 	# Deselect
-	if event.is_action_released('RightClick') and selected_unit != null and not selected_unit.is_moving:
+	elif event.is_action_released('RightClick') and selected_unit != null and not selected_unit.is_moving:
 		selected_unit = null
 
 
@@ -73,15 +74,18 @@ func is_within_bounds(cell_coordinates: Vector2) -> bool:
 	var out := cell_coordinates.x >= position.x and cell_coordinates.x - position.x < grid_real_size.x
 	return out and cell_coordinates.y >= position.y and cell_coordinates.y - position.y < grid_real_size.y
 
+## UNITS FUNCTIONS
 
 func create_units_list():
 	units = get_node("Units").get_children()
 	connect_to_units()
+	
 	
 func connect_to_units():
 	for cur_unit in units:
 			cur_unit.connect("clicked", self, "_on_unit_clicked")
 
 
-func _on_unit_clicked(value):
-	print(value)
+func _on_unit_clicked(unit_ref):
+	print("unit ", unit_ref, " was clicked")
+	selected_unit = unit_ref
