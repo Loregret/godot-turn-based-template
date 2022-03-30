@@ -12,12 +12,17 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 121, 40 )
+current = true
+zoom = Vector2( 1.5, 1.5 )
+
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-grid_size = Vector2( 500, 500 )
+grid_size = Vector2( 15, 15 )
 
 [node name="Draw" type="Node2D" parent="Grid"]
 script = ExtResource( 2 )
@@ -27,8 +32,6 @@ __meta__ = {
 draw_points = false
 draw_connections = false
 draw_indexes = false
-draw_unit_path = false
-draw_unit_selection = false
 line_thickness = 2.0
 grid_path = NodePath("..")
 
@@ -41,10 +44,6 @@ __meta__ = {
 position = Vector2( 121, 40 )
 grid_path = NodePath("../..")
 index_on_grid = 0
-
-[node name="Camera2D" type="Camera2D" parent="Grid/Units/Unit"]
-current = true
-zoom = Vector2( 2, 2 )
 
 [node name="Pathfinding" type="Node" parent="Grid"]
 script = ExtResource( 4 )

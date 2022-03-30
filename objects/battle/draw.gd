@@ -1,4 +1,4 @@
-#tool
+tool
 extends Node2D
 
 
@@ -41,7 +41,7 @@ func _process(_delta):
 
 func _draw() -> void:
 	if has_node(grid_path) and draw:
-		if draw_grid: _draw_grid(false)
+		if draw_grid: _draw_grid(true)
 		if Engine.editor_hint: return
 		if draw_connections: _draw_point_connections()
 		if draw_indexes: _draw_indexes()

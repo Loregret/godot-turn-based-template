@@ -40,7 +40,7 @@ func generate_pathfinding() -> void:
 
 
 func generate_connection(x:int, y:int, i:int) -> void:
-	# ?
+	# connect boundaries
 	connect_point_if_valid(i, i + int(grid_size.y))	
 	connect_point_if_valid(i, i - int(grid_size.y))	
 	# x
@@ -68,5 +68,4 @@ func connect_point_if_valid( existing_point:int, connect_point:int ) -> void:
 func is_within_bounds(cell_coordinates: Vector2) -> bool:
 	var out := cell_coordinates.x >= position.x and cell_coordinates.x - position.x < grid_real_size.x
 	return out and cell_coordinates.y >= position.y and cell_coordinates.y - position.y < grid_real_size.y
-
 
