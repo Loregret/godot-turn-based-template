@@ -5,15 +5,19 @@ export var cell_size := Vector2(80, 80)
 export var grid_size := Vector2(5, 5)
 
 var half_cell_size := cell_size / 2
+var units := []
 
 onready var draw = $Draw
 onready var pathfinding = $Pathfinding 
 onready var selected_unit:Area2D = get_node_or_null("Units/Unit")
-onready var grid_real_size := grid_size * cell_size
+onready var grid_real_size:Vector2 = grid_size * cell_size
 
 
 func _ready():
 	generate_pathfinding()
+	create_units_list()
+	yield(get_tree().create_timer(1), "timeout")
+
 
 
 func _input(event):
@@ -69,3 +73,15 @@ func is_within_bounds(cell_coordinates: Vector2) -> bool:
 	var out := cell_coordinates.x >= position.x and cell_coordinates.x - position.x < grid_real_size.x
 	return out and cell_coordinates.y >= position.y and cell_coordinates.y - position.y < grid_real_size.y
 
+
+func create_units_list():
+	units = get_node("Units").get_children()
+	connect_to_units()
+	
+func connect_to_units():
+	for cur_unit in units:
+			cur_unit.connect("clicked", self, "_on_unit_clicked")
+
+
+func _on_unit_clicked(value):
+	print(value)

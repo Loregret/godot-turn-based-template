@@ -8,15 +8,21 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "grid_draw",
+"language": "GDScript",
+"path": "res://objects/battle/draw.gd"
+} ]
 _global_script_class_icons={
+"grid_draw": "res://assets/icons/paint-roller.png"
 }
 
 [application]
 
 config/name="Dreamiour Engine"
 run/main_scene="res://objects/battle/Battle.tscn"
-config/icon="res://assets/icon.png"
+config/icon="res://assets/icons/project icon.png"
 
 [autoload]
 

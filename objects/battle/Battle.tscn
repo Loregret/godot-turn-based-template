@@ -30,7 +30,6 @@ __meta__ = {
 }
 draw_points = false
 draw_connections = false
-draw_indexes = false
 line_thickness = 2.0
 grid_path = NodePath("..")
 
@@ -46,3 +45,5 @@ index_on_grid = 0
 
 [node name="Pathfinding" type="Node" parent="Grid"]
 script = ExtResource( 4 )
+
+[connection signal="input_event" from="Grid/Units/Unit" to="Grid/Units/Unit" method="_on_Unit_input_event"]
