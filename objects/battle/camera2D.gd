@@ -12,26 +12,18 @@ export (bool) var edge = false
 export (bool) var wheel = true
 
 
-# Camera speed in px/s.
 export (int) var camera_speed = 450 
 
-# Initial zoom value taken from Editor.
-var camera_zoom = get_zoom()
-
-# Value meaning how near to the window edge (in px) the mouse must be,
-# to move a view.
 export (int) var camera_margin = 50
 
 export (int) var zoom_out_limit = 100
+
 export (float) var zoom_in_limit = 0.5
-# It changes a camera zoom value in units... (?, but it works... it probably
-# multiplies camera size by 1+camera_zoom_speed)
+
 export (Vector2) var camera_zoom_speed = Vector2(0.5, 0.5)
 
-# Vector of camera's movement / second.
 var camera_movement = Vector2()
-
-# Previous mouse position used to count delta of the mouse movement.
+var camera_zoom = get_zoom()
 var _prev_mouse_pos = null
 
 # INPUTS
