@@ -14,7 +14,7 @@ __meta__ = {
 }
 
 [node name="Camera" parent="." instance=ExtResource( 6 )]
-visible = false
+position = Vector2( 600, 520 )
 camera_zoom_speed = Vector2( 0.1, 0.1 )
 
 [node name="Grid" type="Node2D" parent="."]
@@ -40,27 +40,27 @@ __meta__ = {
 }
 
 [node name="Unit" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 520, 40 )
+position = Vector2( 840, 520 )
 grid_path = NodePath("../..")
 index_on_grid = -1
 
 [node name="Unit2" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 200, 40 )
+position = Vector2( 520, 520 )
 grid_path = NodePath("../..")
 index_on_grid = -1
 
 [node name="Unit3" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 120, 120 )
+position = Vector2( 440, 600 )
 grid_path = NodePath("../..")
 index_on_grid = -1
 
 [node name="Unit5" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 200, 120 )
+position = Vector2( 760, 680 )
 grid_path = NodePath("../..")
 index_on_grid = -1
 
 [node name="Unit4" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 40, 120 )
+position = Vector2( 360, 600 )
 grid_path = NodePath("../..")
 index_on_grid = -1
 
