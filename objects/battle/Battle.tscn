@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://objects/battle/grid.gd" type="Script" id=1]
 [ext_resource path="res://objects/battle/draw.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://objects/battle/Unit.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/battle/Camera.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/battle/resources/brick-wall.png" type="Texture" id=7]
+[ext_resource path="res://objects/battle/resources/cloaked-figure-on-horseback.png" type="Texture" id=8]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 3 )
@@ -45,11 +46,13 @@ __meta__ = {
 position = Vector2( 440, 520 )
 grid_path = NodePath("../..")
 index_on_grid = -1
+icon_resource = ExtResource( 8 )
 
 [node name="Unit2" parent="Grid/Units" instance=ExtResource( 5 )]
 position = Vector2( 680, 520 )
 grid_path = NodePath("../..")
 index_on_grid = -1
+icon_resource = ExtResource( 8 )
 
 [node name="Unit3" parent="Grid/Units" instance=ExtResource( 5 )]
 position = Vector2( 600, 520 )
