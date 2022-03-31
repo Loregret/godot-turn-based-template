@@ -1,4 +1,5 @@
 extends Node2D
+class_name unit, "res://assets/icons/pawn.png"
 
 export var grid_path: NodePath
 export var index_on_grid: int = 0

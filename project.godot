@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "grid_draw",
 "language": "GDScript",
 "path": "res://objects/battle/draw.gd"
+}, {
+"base": "Node2D",
+"class": "unit",
+"language": "GDScript",
+"path": "res://objects/battle/unit.gd"
 } ]
 _global_script_class_icons={
-"grid_draw": "res://assets/icons/paint-roller.png"
+"grid_draw": "res://assets/icons/paint-roller.png",
+"unit": "res://assets/icons/pawn.png"
 }
 
 [application]
