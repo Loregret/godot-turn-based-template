@@ -10,14 +10,12 @@ var units := []
 onready var draw = $Draw
 onready var pathfinding = $Pathfinding 
 onready var selected_unit:Area2D = null
-#onready var selected_unit:Area2D = get_node_or_null("Units/Unit")
 onready var grid_real_size:Vector2 = grid_size * cell_size
 
 
 func _ready():
 	generate_pathfinding()
 	create_units_list()
-	yield(get_tree().create_timer(1), "timeout")
 
 
 func _input(event):
@@ -30,7 +28,7 @@ func _input(event):
 				## need to check if path is blocked!
 				selected_unit.move_to_index(clicked_cell, true)
 				print(selected_unit, " is moving from ", selected_unit.index_on_grid, " to ", clicked_cell)
-			else: print(selected_unit, " - path is blocked")
+			else: print(selected_unit, " path is blocked")
 	# Selection
 	elif event.is_action_released("LeftClick") and selected_unit == null:
 		pass
@@ -84,8 +82,8 @@ func is_within_bounds(cell_coordinates: Vector2) -> bool:
 func create_units_list():
 	units = get_node("Units").get_children()
 	connect_to_units()
-	
-	
+
+
 func connect_to_units():
 	for cur_unit in units:
 			cur_unit.connect("clicked", self, "_on_unit_clicked")
@@ -94,4 +92,4 @@ func connect_to_units():
 func _on_unit_clicked(unit_ref):
 	if selected_unit == null or !selected_unit.is_moving:
 		selected_unit = unit_ref
-		print(unit_ref, " - selected on ", unit_ref.index_on_grid)
+		print(unit_ref, " selected on ", unit_ref.index_on_grid)
