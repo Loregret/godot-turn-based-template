@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/battle/unit.gd" type="Script" id=1]
-[ext_resource path="res://objects/battle/resources/cloaked-figure-on-horseback.png" type="Texture" id=2]
+[ext_resource path="res://objects/battle/resources/help.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 40 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "tool
+extends Sprite
+
+"
 
 [node name="Unit" type="Area2D"]
 script = ExtResource( 1 )
@@ -16,7 +22,8 @@ self_modulate = Color( 1, 1, 1, 0.427451 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
+script = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cloaked-figure-on-horseback.png-5823caed520a91b8b3a873ef0166701d.stex"
+path="res://.import/brick-wall.png-b0298988f2a801744e0be351cdc560d8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/battle/resources/cloaked-figure-on-horseback.png"
-dest_files=[ "res://.import/cloaked-figure-on-horseback.png-5823caed520a91b8b3a873ef0166701d.stex" ]
+source_file="res://objects/battle/resources/brick-wall.png"
+dest_files=[ "res://.import/brick-wall.png-b0298988f2a801744e0be351cdc560d8.stex" ]
 
 [params]
 

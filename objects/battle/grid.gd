@@ -91,5 +91,8 @@ func connect_to_units():
 
 func _on_unit_clicked(unit_ref):
 	if selected_unit == null or !selected_unit.is_moving:
+		for i in units:
+			i.set_z_index(0)
 		selected_unit = unit_ref
+		selected_unit.set_z_index(1)
 		print(unit_ref, " selected on ", unit_ref.index_on_grid)

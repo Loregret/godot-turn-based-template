@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/brick-wall.png-2e25c7cd433397f9d87d25f292410b3e.stex"
+path="res://.import/help.png-e8733d3c92ce281a85fc1d15ce9ca4d3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/brick-wall.png"
-dest_files=[ "res://.import/brick-wall.png-2e25c7cd433397f9d87d25f292410b3e.stex" ]
+source_file="res://objects/battle/resources/help.png"
+dest_files=[ "res://.import/help.png-e8733d3c92ce281a85fc1d15ce9ca4d3.stex" ]
 
 [params]
 

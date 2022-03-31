@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://objects/battle/grid.gd" type="Script" id=1]
 [ext_resource path="res://objects/battle/draw.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://objects/battle/pathfinding.gd" type="Script" id=4]
 [ext_resource path="res://objects/battle/Unit.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/battle/Camera.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/battle/resources/brick-wall.png" type="Texture" id=7]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 3 )
@@ -54,16 +55,19 @@ index_on_grid = -1
 position = Vector2( 600, 520 )
 grid_path = NodePath("../..")
 index_on_grid = -1
-
-[node name="Unit5" parent="Grid/Units" instance=ExtResource( 5 )]
-position = Vector2( 760, 520 )
-grid_path = NodePath("../..")
-index_on_grid = -1
+icon_resource = ExtResource( 7 )
 
 [node name="Unit4" parent="Grid/Units" instance=ExtResource( 5 )]
 position = Vector2( 520, 520 )
 grid_path = NodePath("../..")
 index_on_grid = -1
+icon_resource = ExtResource( 7 )
+
+[node name="Unit5" parent="Grid/Units" instance=ExtResource( 5 )]
+position = Vector2( 760, 520 )
+grid_path = NodePath("../..")
+index_on_grid = -1
+icon_resource = ExtResource( 7 )
 
 [node name="Pathfinding" type="Node" parent="Grid"]
 script = ExtResource( 4 )
@@ -71,5 +75,5 @@ script = ExtResource( 4 )
 [connection signal="input_event" from="Grid/Units/Unit" to="Grid/Units/Unit" method="_on_Unit_input_event"]
 [connection signal="input_event" from="Grid/Units/Unit2" to="Grid/Units/Unit2" method="_on_Unit_input_event"]
 [connection signal="input_event" from="Grid/Units/Unit3" to="Grid/Units/Unit3" method="_on_Unit_input_event"]
-[connection signal="input_event" from="Grid/Units/Unit5" to="Grid/Units/Unit5" method="_on_Unit_input_event"]
 [connection signal="input_event" from="Grid/Units/Unit4" to="Grid/Units/Unit4" method="_on_Unit_input_event"]
+[connection signal="input_event" from="Grid/Units/Unit5" to="Grid/Units/Unit5" method="_on_Unit_input_event"]

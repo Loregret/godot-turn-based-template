@@ -1,8 +1,11 @@
+tool
 extends Node2D
 class_name unit, "res://assets/icons/pawn.png"
 
 export var grid_path: NodePath
 export var index_on_grid: int = 0
+export (StreamTexture) var icon_resource = preload("res://objects/battle/resources/help.png") setget on_set
+
 
 var is_moving := false
 var path: PoolVector2Array
@@ -20,13 +23,23 @@ signal clicked(unit_ref)
 
 func _ready():
 	grid = get_node(grid_path)
-	yield(get_tree().create_timer(0.01), "timeout")
+	call_deferred("initialize")
+
+
+func on_set(value: StreamTexture):
+	icon_resource = value
+	if sprite == null: return
+	sprite.texture = icon_resource as StreamTexture
+
+
+func initialize():
+	sprite.texture = icon_resource
+	if Engine.editor_hint: return
 	if grid.pathfinding != null:
 		if self.index_on_grid == -1: 
 			self.index_on_grid = grid.pathfinding.astar.get_closest_point(self.position)
-			print(index_on_grid)
 		else: position = Vector2.ZERO
-		move_to_index(index_on_grid, false)
+	move_to_index(index_on_grid, false)
 
 
 func is_within_bounds(pos:Vector2) -> bool:
