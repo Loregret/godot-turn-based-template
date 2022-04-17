@@ -1,6 +1,6 @@
 tool
 extends Node2D
-class_name grid_draw, "res://assets/icons/paint-roller.png"
+class_name grid_draw, "res://assets/icons/pencil-brush.png"
 
 
 export var draw := true

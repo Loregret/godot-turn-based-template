@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/help.png-e8733d3c92ce281a85fc1d15ce9ca4d3.stex"
+path="res://.import/path-distance.png-879e8a386560391fa2d23243bda1fe2a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/battle/resources/help.png"
-dest_files=[ "res://.import/help.png-e8733d3c92ce281a85fc1d15ce9ca4d3.stex" ]
+source_file="res://assets/icons/path-distance.png"
+dest_files=[ "res://.import/path-distance.png-879e8a386560391fa2d23243bda1fe2a.stex" ]
 
 [params]
 
